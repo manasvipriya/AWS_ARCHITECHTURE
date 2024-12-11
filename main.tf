@@ -2,7 +2,7 @@ provider "aws" {
   region = var.region
 }
 
-# VPC module (with Internet Gateway inside the VPC module)
+
 module "vpc" {
   source      = "./modules/vpc"
   cidr_block  = var.vpc_cidr
@@ -11,8 +11,8 @@ module "vpc" {
  
 module "subnet" {
   source               = "./modules/subnet"
-  vpc_id               = module.vpc.vpc_id  # Pass the vpc_id from the vpc module
-  internet_gateway_id  = module.vpc.internet_gateway_id  # Pass the gateway_id
+  vpc_id               = module.vpc.vpc_id  
+  internet_gateway_id  = module.vpc.internet_gateway_id  
   public_subnet_cidr   = var.public_subnet_cidr
   web_subnet_cidr      = var.web_subnet_cidr
   app_subnet_cidr      = var.app_subnet_cidr
@@ -37,7 +37,7 @@ module "bastion" {
   public_subnets = module.subnet.public_subnets
 }
 
-# Security Group for ELB (still in root main.tf)
+
 resource "aws_security_group" "elb_sg" {
   name        = "${var.environment}-elb-sg"
   description = "Security group for ELB"
@@ -62,7 +62,7 @@ resource "aws_security_group" "elb_sg" {
   }
 }
 
-# ELB Module (remains in root)
+
 module "elb" {
   source           = "./modules/elb"
   public_subnets   = module.subnet.public_subnets
@@ -71,7 +71,7 @@ module "elb" {
   security_groups  = [aws_security_group.elb_sg.id]
 }
 
-# Security Group for EC2 Instances
+
 resource "aws_security_group" "ec2_sg" {
   name        = "${var.environment}-ec2-sg"
   description = "Security group for EC2 instances"
@@ -110,5 +110,5 @@ module "ec2" {
   security_groups = [aws_security_group.ec2_sg.id]
   vpc_id         = module.vpc.vpc_id
   environment    = var.environment
-  subnets        = concat(module.subnet.web_subnets, module.subnet.app_subnets)  # Concatenate web + app subnets
+  subnets        = concat(module.subnet.web_subnets, module.subnet.app_subnets)  
 }

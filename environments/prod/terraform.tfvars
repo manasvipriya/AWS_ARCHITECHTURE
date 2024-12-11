@@ -9,7 +9,7 @@ app_subnet_cidr = ["192.168.5.0/24", "192.168.6.0/24"]
 availability_zones = ["us-west-2a", "us-west-2b"]
 
 instance_type      = "t3.medium"
-ami_id        = "ami-yyyyyyyyyyyyyyyyy"  # Replace with a valid AMI ID
+ami_id        = "ami-yyyyyyyyyyyyyyyyy" 
 
-elb_security_groups = ["sg-zzzzzzzz", "sg-wwwwwwww"]  # Replace with your actual security group IDs
+elb_security_groups = ["sg-zzzzzzzz", "sg-wwwwwwww"]  
 

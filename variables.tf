@@ -5,7 +5,7 @@ variable "region" {
   default     = "us-east-1"
 }
 
-# Environment name (e.g., dev, prod)
+# Environment name 
 variable "environment" {
   description = "The environment name (e.g., dev, prod)."
   type        = string
@@ -51,28 +51,28 @@ variable "availability_zones" {
 variable "instance_type" {
   description = "Instance type for EC2 instances."
   type        = string
-  default     = "t2.micro"  # Update the default if required
+  default     = "t2.micro"  
 }
 
 # AMI ID for EC2 Instances
 variable "ami_id" {
   description = "AMI ID for EC2 instances."
   type        = string
-  default     = "ami-007868005aea67c54"  # Replace with a valid AMI ID
+  default     = "ami-007868005aea67c54"  
 }
 
 # Security Groups for the Load Balancer
 variable "elb_security_groups" {
   description = "Security groups for the Elastic Load Balancer."
   type        = list(string)
-  default     = ["sg-0a3c46c65b683021e"]  # Replace with your actual security group IDs
+  default     = ["sg-0a3c46c65b683021e"] 
 }
 
 # Security Groups for EC2 Instances
 variable "ec2_security_groups" {
   description = "Security groups for EC2 instances."
   type        = list(string)
-  default     = []  # Provide the EC2 security group IDs here if needed
+  default     = [] 
 }
 
 # Enable NAT Gateway (Optional)
